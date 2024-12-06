@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from app.application.models import FormTemplate
+
 
 class UoW(ABC):
     @abstractmethod
@@ -12,5 +14,7 @@ class UoW(ABC):
 
 
 class DatabaseGateway(ABC):
-    pass
+    @abstractmethod
+    async def get_matching_forms(self, search_fields: list[FormTemplate]):
+        raise NotImplementedError
 

@@ -1,8 +1,9 @@
 from pydantic import BaseModel
 
-from app.application.models import FormField
+from app.adapters.sqlalchemy_db.models.field_value_type import FieldValueType
 
 
 class FormTemplate(BaseModel):
+    id: int
     name: str
-    fields: list[FormField]
+    fields: dict[str, FieldValueType]
