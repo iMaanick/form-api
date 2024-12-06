@@ -1,8 +1,8 @@
 """Added initial table
 
-Revision ID: dc895206c1f4
+Revision ID: b3ac6b434ecc
 Revises: 
-Create Date: 2024-12-05 18:05:03.977988
+Create Date: 2024-12-06 12:06:15.272197
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'dc895206c1f4'
+revision: str = 'b3ac6b434ecc'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -28,8 +28,9 @@ def upgrade() -> None:
     )
     op.create_table('form_fields',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('field_name', sa.String(), nullable=False),
-    sa.Column('field_type', sa.Enum('email', 'phone', 'date', 'text', name='formvaluetype'), nullable=False),
+    sa.Column('name', sa.String(), nullable=False),
+    sa.Column('type', sa.Enum('email', 'phone', 'date', 'text', name='fieldvaluetype'), nullable=False),
+    sa.Column('value', sa.String(), nullable=False),
     sa.Column('template_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['template_id'], ['form_templates.id'], ),
     sa.PrimaryKeyConstraint('id')
