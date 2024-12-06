@@ -4,6 +4,9 @@ from _pytest.monkeypatch import MonkeyPatch
 from starlette import status
 from starlette.testclient import TestClient
 
+from app.application.models import FormTemplate
+from app.application.models.field_value_type import FieldValueType
+
 
 def test_get_form_unprocessable_entity_params(
         client: TestClient,
@@ -56,3 +59,31 @@ def test_get_form_check_types(
         'additionalProp4': 'date',
         'additionalProp5': 'email'
     }
+
+
+def test_get_form_success(
+        client: TestClient,
+        mock_database_gateway: AsyncMock,
+        monkeypatch: MonkeyPatch
+) -> None:
+    mock_database_gateway.get_matching_forms.return_value = [
+        FormTemplate(
+            id=1,
+            name="First",
+            fields={"email": FieldValueType.email}
+        ),
+        FormTemplate(
+            id=2,
+            name="Second",
+            fields={"Text": FieldValueType.text}
+        ),
+    ]
+    data = {
+        "email": "MNK@mail.ru",
+    }
+
+    response = client.post(
+        "/get_form",
+        json=data,
+    )
+    assert response.json() == [{'name': 'First'}]
