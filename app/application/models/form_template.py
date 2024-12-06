@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from app.adapters.sqlalchemy_db.models.field_value_type import FieldValueType
+from app.application.models.field_value_type import FieldValueType
 
 
 class FormTemplate(BaseModel):

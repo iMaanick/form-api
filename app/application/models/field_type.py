@@ -3,7 +3,7 @@ from datetime import datetime
 from pydantic import BaseModel, constr
 from pydantic import field_validator, EmailStr
 
-from app.adapters.sqlalchemy_db.models.field_value_type import FieldValueType
+from app.application.models.field_value_type import FieldValueType
 
 
 class Date(BaseModel):

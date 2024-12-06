@@ -6,7 +6,6 @@ root_router = APIRouter()
 
 root_router.include_router(
     form_router,
-    prefix="/form",
     tags=["form"]
 )
 

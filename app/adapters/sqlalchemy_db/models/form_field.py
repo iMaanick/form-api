@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.adapters.sqlalchemy_db.models import Base
 from app.application import models
 from app.application.models import Email, Phone, Text, Date
-from .field_value_type import FieldValueType
+from app.application.models.field_value_type import FieldValueType
 
 if TYPE_CHECKING:
     from .form_template import FormTemplate
