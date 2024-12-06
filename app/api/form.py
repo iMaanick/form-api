@@ -2,8 +2,7 @@ from typing import Any, Annotated
 
 from fastapi import APIRouter, Body, Depends
 
-from app.application.form import filter_matching_forms
-from app.application.models import FormField
+from app.application.form import get_matching_forms
 from app.application.protocols.database import DatabaseGateway
 
 form_router = APIRouter()
@@ -14,12 +13,8 @@ async def get_form(
         database: Annotated[DatabaseGateway, Depends()],
         form_data: dict[str, str] = Body(),
 ) -> Any:
-    search_fields = []
-    for key, value in form_data.items():
-        search_fields.append(FormField(name=key, field={"value": value}))
-    data = await database.get_matching_forms(search_fields)
-    res = await filter_matching_forms(data, search_fields)
-    return res
+    forms = await get_matching_forms(form_data, database)
+    return forms
 
 # {
 #   "additionalProp1": "string",

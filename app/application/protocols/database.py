@@ -15,6 +15,6 @@ class UoW(ABC):
 
 class DatabaseGateway(ABC):
     @abstractmethod
-    async def get_matching_forms(self, search_fields: list[FormTemplate]):
+    async def get_matching_forms(self, required_fields_count: int) -> list[FormTemplate]:
         raise NotImplementedError
 

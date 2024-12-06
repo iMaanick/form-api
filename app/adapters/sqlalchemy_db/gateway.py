@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.adapters.sqlalchemy_db import models
-from app.application.models import FormField, FormTemplate
+from app.application.models import FormTemplate
 from app.application.protocols.database import DatabaseGateway
 
 
@@ -11,11 +11,9 @@ class SqlaGateway(DatabaseGateway):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def get_matching_forms(self, search_fields: list[FormField]) -> list[FormTemplate]:
-        if not search_fields:
+    async def get_matching_forms(self, required_fields_count: int) -> list[FormTemplate]:
+        if required_fields_count == 0:
             return []
-
-        required_fields_count = len(search_fields)
 
         query = (
             select(models.FormTemplate)
