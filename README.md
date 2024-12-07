@@ -49,7 +49,7 @@ alembic upgrade head
 
 7. Для заполнения тестовыми данными выполните:
 ```
-python -m app.main.test
+python -m app.main.test_data
 ```
 8. Для запуска c tinydb выполните:
 ```
