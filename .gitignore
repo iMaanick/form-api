@@ -22,3 +22,4 @@ docs.zip
 archive.zip
 .idea/*
 /app/main/test.py
+/app/main/test_nosql.py

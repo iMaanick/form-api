@@ -28,6 +28,5 @@ def client(mock_database_gateway: AsyncMock, mock_uow: AsyncMock) -> TestClient:
     init_routers(app)
 
     app.dependency_overrides[DatabaseGateway] = lambda: mock_database_gateway
-    app.dependency_overrides[UoW] = lambda: mock_uow
 
     return TestClient(app)
