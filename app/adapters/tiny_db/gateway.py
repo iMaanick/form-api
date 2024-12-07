@@ -8,7 +8,7 @@ from app.application.protocols.database import DatabaseGateway
 
 
 class TinyDBGateway(DatabaseGateway):
-    def __init__(self):
+    def __init__(self) -> None:
         db_path = os.getenv('DB_PATH')
         if not db_path:
             raise ValueError("DB_PATH env variable is not set")

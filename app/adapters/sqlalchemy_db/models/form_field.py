@@ -30,4 +30,7 @@ class FormField(Base):
             FieldValueType.text: Text,
         }
         field_class = field_mapping.get(self.type)
+        if not field_class:
+            raise ValueError(f"Invalid field type: {self.type}")
+
         return models.FormField(name=self.name, field=field_class(value=self.value))
